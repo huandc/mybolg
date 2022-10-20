@@ -1,0 +1,1 @@
+INSERT INTO blog.t_user (avatar, create_time, email, nickname, password, type, update_time, username) VALUES (null, null, null, '郇冲', '6e458aa69069e6cace448d8f4532870f', null, null, 'huan');

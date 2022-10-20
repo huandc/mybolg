@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <!---图标库--->
+    <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+    <link rel='stylesheet' href='../../static/css/bootstrap.min.css' th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}">
+
+</head>
+<body>
+    <div class="section">
+        <div class="container">
+            <div class="row full-height justify-content-center">
+                <div class="col-12 text-center align-self-center py-5">
+                    <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                        <h6 class="mb-0 pb-3"><span>登录</span><span>注册</span></h6>
+                        <input class="checkbox" type="checkbox" id="reg-log" name="reg-log">
+                        <label for="reg-log"></label>
+                        <div class="card-3d-wrap mx-auto">
+                            <div class="card-3d-wrapper">
+                                <div class="card-front">
+                                    <div class="center-wrap">
+                                        <form class="section text-center" action="#" method="post" th:action="@{/admin/login}" >
+                                            <h4 class="mb-4 pb-3">登录</h4>
+                                            <div class="form-group">
+                                                <i class="user icon"></i>
+                                                <input value="123" type="text" name="username" class="ui form-style"
+                                                       placeholder="用户名" id="username" autocomplete="on">
+                                                <i class="input-icon uil uil-user"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input value="123" type="password" name="password" class="ui form-style"
+                                                       placeholder="密码" id="password" autocomplete="off">
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                            </div>
+                                            <div class="ui error message"></div>
+                                            <div class="ui negative message" th:text="${message}">用户名或密码错误</div>
+                                            <input type="submit" class="btn mt-4" value="登录">
+                                            <p class="mb-0 mt-4 text-center"><a href="#" class="link">忘记密码?</a></p>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <div class="center-wrap">
+                                        <form class="section text-center" action="#" th:action="@{/admin/sign}" method="post"
+                                              id="register_form">
+                                            <h4 class="mb-4 pb-3">注册</h4>
+                                            <div class="form-group">
+                                                <input type="text" name="username" class="form-style" placeholder="用户名"
+                                                       id="register_username" autocomplete="off">
+                                                <span id="s_username"></span>
+                                                <i class="input-icon uil uil-user"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input type="password" name="password" class="form-style"
+                                                       placeholder="密码" id="register_password" autocomplete="off">
+                                                <span id="s_password"></span>
+                                                <i class="input-icon uil uil-at"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input type="password" name="password_confirm" class="form-style"
+                                                       placeholder="确认密码" id="confirm_password" autocomplete="off">
+                                                <span id="s_confirm_password"></span>
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                            </div>
+                                            <input type="submit" class="btn mt-4" value="提交">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+<script>
+
+    window.onload = function () {
+        document.getElementById("register_form").onsubmit = function () {
+            return checkname() && checkpassword();
+        };
+
+        document.getElementById("register_username").onblur = checkname;
+        document.getElementById("register_password").onblur = checkpassword;
+        document.getElementById("confirm_password").onblur = checkconfirm_password;
+    };
+
+    function checkname() {
+        var name = document.getElementById("register_username").value;
+        var reg_username = /^\w{6,12}$/;
+        var flag = reg_username.test(name);
+        var s_username = document.getElementById("s_username");
+        if (flag) {
+            //提示对勾
+            s_username.innerHTML = "正确";
+        } else {
+            s_username.innerHTML = "用户名格式错误";
+        }
+        return flag;
+    }
+
+    function checkpassword() {
+        var register_password = document.getElementById("register_password").value;
+        var reg_username = /^\w{6,12}$/;
+        var flag = reg_username.test(register_password);
+        var s_username = document.getElementById("s_password");
+        if (flag) {
+            //提示对勾
+            s_username.innerHTML = "正确";
+        } else {
+            s_username.innerHTML = "密码格式错误";
+        }
+        return flag;
+    }
+
+
+    function checkconfirm_password() {
+        var register_password = document.getElementById("register_password").value;
+        var confirm_password = document.getElementById("confirm_password").value;
+
+        var flag = (register_password === confirm_password)
+        var s_username = document.getElementById("s_confirm_password");
+        if (flag) {
+            //提示对勾
+            s_username.innerHTML = "正确";
+        } else {
+            s_username.innerHTML = "两次密码不相同";
+        }
+        return flag;
+    }
+
+
+</script>
+
+
+</html>
+

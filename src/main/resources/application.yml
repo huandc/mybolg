@@ -1,0 +1,8 @@
+spring:
+  thymeleaf:
+    mode: HTML
+  profiles:
+    active: dev
+
+#comment:
+#  avatar: https://picsum.photos/seed/picsum/100/100
